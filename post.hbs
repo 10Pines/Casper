@@ -12,6 +12,12 @@ into the {body} of the default.hbs template --}}
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
 
+{{#has tag="es"}}
+	<html lang="es">
+{{else}}
+	<html lang="en">
+{{/has}}
+
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
