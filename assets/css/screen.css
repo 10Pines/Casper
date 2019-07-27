@@ -91,7 +91,8 @@ body {
 @media (min-width: 900px) {
     .home-template .post-feed,
     .tag-template .post-feed,
-    .author-template .post-feed {
+    .author-template .post-feed,
+    .section-template .post-feed {
         margin-top: -70px;
         padding-top: 0;
     }
@@ -184,6 +185,11 @@ body {
     .site-description {
         font-size: 1.8rem;
     }
+}
+
+.section-header-content {
+    padding-top: 3vw;
+    padding-bottom: calc(3vw + 70px);
 }
 
 

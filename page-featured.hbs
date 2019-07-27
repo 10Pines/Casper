@@ -1,0 +1,28 @@
+{{!< default}}
+
+<header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+    <div class="site-header-content section-header-content">
+        <h1 class="site-title">Featured Posts</h1>
+    </div>
+</header>
+
+{{#post}}
+
+    <main id="site-main" class="site-main outer section-template" role="main">
+        <div class="inner">
+            <div class="post-feed section-post-feed">
+                {{#get "posts" filter="featured:true" limit="all"}}
+                    {{#if posts}}
+                        {{#foreach posts}}
+                            {{> "post-card"}}
+                        {{/foreach}}
+                    {{/if}}
+                {{/get}}
+            </div>
+        </div>
+    </main>
+
+{{/post}}
