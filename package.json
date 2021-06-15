@@ -50,5 +50,8 @@
   },
   "config": {
     "posts_per_page": 25
+  },
+  "dependencies": {
+    "ghost-finder": "^3.0.1"
   }
 }

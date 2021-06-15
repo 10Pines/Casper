@@ -12,216 +12,354 @@ into the {body} of the default.hbs template --}}
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
 
-{{#has tag="es"}}
-	<html lang="es">
-{{else}}
-	<html lang="en">
-{{/has}}
+    {{#has tag="es"}}
+        <html lang="es">
+    {{else}}
+        <html lang="en">
+    {{/has}}
 
-<main id="site-main" class="site-main outer" role="main">
-    <div class="inner">
+    <main id="site-main" class="site-main outer" role="main">
+        <div class="inner">
 
-        <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
+            <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
 
-            <header class="post-full-header">
-                <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
-                    {{#primary_tag}}
-                        <span class="date-divider">/</span> <a href="{{url}}">{{name}}</a>
-                    {{/primary_tag}}
-                </section>
-                <h1 class="post-full-title">{{title}}</h1>
-            </header>
-
-            {{#if feature_image}}
-            <figure class="post-full-image" style="background-image: url({{feature_image}})">
-            </figure>
-            {{/if}}
-
-            <section class="post-full-content">
-                {{content}}
-            </section>
-
-            {{!-- Email subscribe form at the bottom of the page --}}
-            {{#if @labs.subscribers}}
-            <section class="subscribe-form">
-                <h3 class="subscribe-form-title">Subscribe to {{@blog.title}}</h3>
-                <p>Get the latest posts delivered right to your inbox</p>
-                {{subscribe_form placeholder="youremail@example.com"}}
-            </section>
-            {{/if}}
-
-            <footer class="post-full-footer">
-                {{!-- Everything inside the #author tags pulls data from the author --}}
-                {{#author}}
-
-                <section class="author-card">
-                    {{#if profile_image}}
-                        <img class="author-profile-image" src="{{profile_image}}" alt="{{name}}" />
-                    {{/if}}
-                    <section class="author-card-content">
-                        <h4 class="author-card-name"><a href="{{url}}">{{name}}</a></h4>
-                        {{#if bio}}
-                            <p>{{bio}}</p>
-                        {{else}}
-                            <p>Read <a href="{{url}}">more posts</a> by this author.</p>
-                        {{/if}}
+                <header class="post-full-header">
+                    <section class="post-full-meta">
+                        <time class="post-full-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date
+                                format="D MMMM YYYY"}}</time>
+                        {{#primary_tag}}
+                            <span class="date-divider">/</span> <a href="{{url}}">{{name}}</a>
+                        {{/primary_tag}}
                     </section>
-                </section>
-                <div class="post-full-footer-right">
-                    <a class="author-card-button" href="{{url}}">Read More</a>
-                </div>
+                    <h1 class="post-full-title">{{title}}</h1>
+                    <h5 class="read-time-card">{{reading_time}}</h5>
+                </header>
 
-                {{/author}}
-            </footer>
-
-            {{!--
-
-            If you use Disqus comments, just uncomment this block.
-            The only thing you need to change is "test-apkdzgmqhj" - which
-            should be replaced with your own Disqus site-id.
-            --}}
-            <section class="post-full-comments">
-                <div id="disqus_thread"></div>
-                <script>
-                    var disqus_config = function () {
-                        this.page.url = '{{url absolute="true"}}';
-                        this.page.identifier = 'ghost-{{comment_id}}';
-                    };
-                    (function() {
-                        var d = document, s = d.createElement('script');
-                        s.src = 'https://10pinesblog.disqus.com/embed.js';
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-            </section>
-
-
-        </article>
-
-    </div>
-</main>
-
-{{!-- Links to Previous/Next posts --}}
-<aside class="read-next outer">
-    <div class="inner">
-        <div class="read-next-feed">
-            {{#if primary_tag}}
-            {{#get "posts" filter="tags:{{primary_tag.slug}}+id:-{{id}}" limit="3" as |related_posts|}}
-                {{#if related_posts}}
-                <article class="read-next-card"
-                    {{#if ../primary_tag.feature_image}}
-                        style="background-image: url({{../primary_tag.feature_image}})"
-                    {{else}}
-                        {{#if @blog.cover_image}}
-                            style="background-image: url({{@blog.cover_image}})"{{/if}}
-                    {{/if}}
-                >
-                    <header class="read-next-card-header">
-                        <small class="read-next-card-header-sitetitle">&mdash; {{@blog.title}} &mdash;</small>
-                        {{#../primary_tag}}
-                        <h3 class="read-next-card-header-title"><a href="{{url}}">{{name}}</a></h3>
-                        {{/../primary_tag}}
-                    </header>
-                    <div class="read-next-divider">{{> "icons/infinity"}}</div>
-                    <div class="read-next-card-content">
-                        <ul>
-                            {{#foreach related_posts}}
-                            <li><a href="{{url}}">{{title}}</a></li>
-                            {{/foreach}}
-                        </ul>
-                    </div>
-                    <footer class="read-next-card-footer">
-                        <a href="{{#../primary_tag}}{{url}}{{/../primary_tag}}">{{plural meta.pagination.total empty='No posts' singular='% post' plural='See all % posts'}} →</a>
-                    </footer>
-                </article>
+                {{#if feature_image}}
+                    <figure class="post-full-image" style="background-image: url({{feature_image}})">
+                    </figure>
                 {{/if}}
-            {{/get}}
-            {{/if}}
 
-            {{!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs --}}
-            {{#next_post}}
-                {{> "post-card"}}
-            {{/next_post}}
+                <section class="post-full-content">
+                    {{content}}
+                </section>
 
-            {{!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs --}}
-            {{#prev_post}}
-                {{> "post-card"}}
-            {{/prev_post}}
+                {{!-- Email subscribe form at the bottom of the page --}}
+                {{#if @labs.subscribers}}
+                    <section class="subscribe-form">
+                        <h3 class="subscribe-form-title">Subscribe to {{@site.title}}</h3>
+                        <p>Get the latest posts delivered right to your inbox</p>
+                        {{subscribe_form placeholder="youremail@example.com"}}
+                    </section>
+                {{/if}}
+
+                <footer class="post-full-footer" style="padding-bottom: 0px">
+                    {{!-- Everything inside the #author tags pulls data from the author --}}
+                    {{#primary_author}}
+
+                        <section class="author-card">
+                            {{#if profile_image}}
+                                <img class="author-profile-image" src="{{profile_image}}" alt="{{name}}"/>
+                            {{else}}
+                                <img class="author-profile-image"
+                                     src="{{asset "logo-circulizable-transparente-1.png"}} alt="{{name}}" />
+                            {{/if}}
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="{{url}}">{{name}}</a></h4>
+                                {{#if bio}}
+                                    <p>{{bio}}</p>
+                                {{else}}
+                                    <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+                                {{/if}}
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="{{url}}">Read More</a>
+                        </div>
+                    {{/primary_author}}
+                </footer>
+                <section class="post-full-comments">
+                    <!-- Begin Mailchimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+                    <style type="text/css">
+                        #mc_embed_signup {
+                            background: #fff;
+                            clear: left;
+                            font: 14px Helvetica, Arial, sans-serif;
+                        }
+
+                        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                    </style>
+                    <!-- Begin Mailchimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+                    <style type="text/css">
+                        #mc_embed_signup {
+                            background: #fff;
+                            clear: left;
+                            font: 14px Helvetica, Arial, sans-serif;
+                        }
+
+                        .row {
+                            display: flex;
+                        }
+
+                        .column {
+                            flex: 50%;
+                            padding: 10px;
+                        }
+                    </style>
+                    <hr>
+                    <div id="mc_embed_signup"
+                         style="background-image: url({{asset
+                                 "backnewsletter.png"}}); border-radius: 3em; box-shadow: 2px 2px #666666;">
+                        <form action="https://10pines.us2.list-manage.com/subscribe/post?u=2af339e7051528125d009e213&amp;id=244c24d39f&SIGNUP=Blog"
+                              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                              class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                <h2>Recibí nuestra Newsletter!</h2>
+                                <strong>¿Querés estar al tanto de todo lo que pasa en 10Pines?</strong>
+                                <div class="indicates-required"><span class="asterisk">*</span> Campo requerido</div>
+
+                                <div class="mc-field-group" style="padding: 10px">
+                                    <label for="mce-EMAIL">Email <span class="asterisk">*</span>
+                                    </label>
+                                    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                                </div>
+                                <div class="mc-field-group" style="padding-bottom: 1%">
+                                    <div class="row">
+                                        <div class="column">
+                                            <label for="mce-FNAME">Nombre </label>
+                                            <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+                                        </div>
+                                        <div class="column">
+                                            <label for="mce-LNAME">Apellido </label>
+                                            <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mc-field-group input-group">
+                                    <div class="row">
+                                        <div class="column">
+                                            <h2>¿Qué te gustaría recibir? </h2>
+                                            <ul>
+                                                <input type="checkbox" value="1" name="group[68822][1]"
+                                                       id="mce-group[68822]-68822-0"><label
+                                                    for="mce-group[68822]-68822-0" style="margin-right: 4%"> Cursos /
+                                                Webinars</label>
+                                                <input type="checkbox" value="2" name="group[68822][2]"
+                                                       id="mce-group[68822]-68822-1"><label
+                                                    for="mce-group[68822]-68822-1"> Blog / Cultura / Gestión</label>
+                                                <input type="checkbox" value="4" name="group[68998][4]"
+                                                       id="mce-group[68998]-68998-0" style="display:none" checked>
+                                            </ul>
+                                        </div>
+                                        <div class="column">
+                                            <br>
+                                            <div class="clear" style="float: right"><input type="submit"
+                                                                                           value="Subscribe"
+                                                                                           name="subscribe"
+                                                                                           id="mc-embedded-subscribe"
+                                                                                           class="button"
+                                                                                           style="background-color: #8fb925; width: 300px; height: 50px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="mce-responses" class="clear">
+                                        <div class="response" id="mce-error-response" style="display:none"></div>
+                                        <div class="response" id="mce-success-response" style="display:none"></div>
+                                    </div>
+                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input
+                                            type="text" name="b_2af339e7051528125d009e213_244c24d39f" tabindex="-1"
+                                            value=""></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <script type='text/javascript'
+                            src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+                    <script type='text/javascript'>(function ($) {
+                        window.fnames = new Array();
+                        window.ftypes = new Array();
+                        fnames[0] = 'EMAIL';
+                        ftypes[0] = 'email';
+                        fnames[1] = 'FNAME';
+                        ftypes[1] = 'text';
+                        fnames[2] = 'LNAME';
+                        ftypes[2] = 'text'; /*
+ * Translated default messages for the $ validation plugin.
+ * Locale: ES
+ */
+                        $.extend($.validator.messages, {
+                            required: "Este campo es obligatorio.",
+                            remote: "Por favor, rellena este campo.",
+                            email: "Por favor, escribe una dirección de correo válida",
+                            url: "Por favor, escribe una URL válida.",
+                            date: "Por favor, escribe una fecha válida.",
+                            dateISO: "Por favor, escribe una fecha (ISO) válida.",
+                            number: "Por favor, escribe un número entero válido.",
+                            digits: "Por favor, escribe sólo dígitos.",
+                            creditcard: "Por favor, escribe un número de tarjeta válido.",
+                            equalTo: "Por favor, escribe el mismo valor de nuevo.",
+                            accept: "Por favor, escribe un valor con una extensión aceptada.",
+                            maxlength: $.validator.format("Por favor, no escribas más de {0} caracteres."),
+                            minlength: $.validator.format("Por favor, no escribas menos de {0} caracteres."),
+                            rangelength: $.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
+                            range: $.validator.format("Por favor, escribe un valor entre {0} y {1}."),
+                            max: $.validator.format("Por favor, escribe un valor menor o igual a {0}."),
+                            min: $.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
+                        });
+                    }(jQuery));
+                    var $mcj = jQuery.noConflict(true);</script>
+                    <!--End mc_embed_signup-->
+                    <!--End mc_embed_signup-->
+                </section>
+                <hr>
+                <section class="post-full-comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = '{{url absolute="true"}}';
+                            this.page.identifier = 'ghost-{{comment_id}}';
+                        };
+                        (function () {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://10pinesblog.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+
+            </article>
 
         </div>
-    </div>
-</aside>
+    </main>
 
-{{!-- Floating header which appears on-scroll, included from includes/floating-header.hbs --}}
-{{> floating-header}}
+    {{!-- Links to Previous/Next posts --}}
+    <aside class="read-next outer">
+        <div class="inner">
+            <div class="read-next-feed">
+                {{#if primary_tag}}
+                    {{#get "posts" filter="tags:{{primary_tag.slug}}+id:-{{id}}" limit="3" as |related_posts|}}
+                        {{#if related_posts}}
+                            <article class="read-next-card"
+                                {{#if ../primary_tag.feature_image}}
+                                     style="background-image: url({{../primary_tag.feature_image}})"
+                                {{else}}
+                                    {{#if @site.cover_image}}
+                                     style="background-image: url({{@site.cover_image}})"{{/if}}
+                                {{/if}}
+                            >
+                                <header class="read-next-card-header">
+                                    <small class="read-next-card-header-sitetitle">&mdash; {{@site.title}}
+                                        &mdash;</small>
+                                    {{#../primary_tag}}
+                                        <h3 class="read-next-card-header-title"><a href="{{url}}">{{name}}</a></h3>
+                                    {{/../primary_tag}}
+                                </header>
+                                <div class="read-next-divider">{{> "icons/infinity"}}</div>
+                                <div class="read-next-card-content">
+                                    <ul>
+                                        {{#foreach related_posts}}
+                                            <li><a href="{{url}}">{{title}}</a></li>
+                                        {{/foreach}}
+                                    </ul>
+                                </div>
+                                <footer class="read-next-card-footer">
+                                    <a href="{{#../primary_tag}}{{url}}{{/../primary_tag}}">{{plural
+                                            meta.pagination.total empty='No posts' singular='% post'
+                                            plural='See all % posts'}} →</a>
+                                </footer>
+                            </article>
+                        {{/if}}
+                    {{/get}}
+                {{/if}}
+
+                {{!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs --}}
+                {{#next_post}}
+                    {{> "post-card"}}
+                {{/next_post}}
+
+                {{!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs --}}
+                {{#prev_post}}
+                    {{> "post-card"}}
+                {{/prev_post}}
+
+            </div>
+        </div>
+    </aside>
+
+    {{!-- Floating header which appears on-scroll, included from includes/floating-header.hbs --}}
+    {{> floating-header}}
 
 {{/post}}
 
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
-<script>
+    <script>
 
-// NOTE: Scroll performance is poor in Safari
-// - this appears to be due to the events firing much more slowly in Safari.
-//   Dropping the scroll event and using only a raf loop results in smoother
-//   scrolling but continuous processing even when not scrolling
-$(document).ready(function () {
-    // Start fitVids
-    var $postContent = $(".post-full-content");
-    $postContent.fitVids();
-    // End fitVids
+        // NOTE: Scroll performance is poor in Safari
+        // - this appears to be due to the events firing much more slowly in Safari.
+        //   Dropping the scroll event and using only a raf loop results in smoother
+        //   scrolling but continuous processing even when not scrolling
+        $(document).ready(function () {
+            // Start fitVids
+            var $postContent = $(".post-full-content");
+            $postContent.fitVids();
+            // End fitVids
 
-    var progressBar = document.querySelector('progress');
-    var header = document.querySelector('.floating-header');
-    var title = document.querySelector('.post-full-title');
+            var progressBar = document.querySelector('progress');
+            var header = document.querySelector('.floating-header');
+            var title = document.querySelector('.post-full-title');
 
-    var lastScrollY = window.scrollY;
-    var lastWindowHeight = window.innerHeight;
-    var lastDocumentHeight = $(document).height();
-    var ticking = false;
+            var lastScrollY = window.scrollY;
+            var lastWindowHeight = window.innerHeight;
+            var lastDocumentHeight = $(document).height();
+            var ticking = false;
 
-    function onScroll() {
-        lastScrollY = window.scrollY;
-        requestTick();
-    }
+            function onScroll() {
+                lastScrollY = window.scrollY;
+                requestTick();
+            }
 
-    function onResize() {
-        lastWindowHeight = window.innerHeight;
-        lastDocumentHeight = $(document).height();
-        requestTick();
-    }
+            function onResize() {
+                lastWindowHeight = window.innerHeight;
+                lastDocumentHeight = $(document).height();
+                requestTick();
+            }
 
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(update);
-        }
-        ticking = true;
-    }
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(update);
+                }
+                ticking = true;
+            }
 
-    function update() {
-        var trigger = title.getBoundingClientRect().top + window.scrollY;
-        var triggerOffset = title.offsetHeight + 35;
-        var progressMax = lastDocumentHeight - lastWindowHeight;
+            function update() {
+                var trigger = title.getBoundingClientRect().top + window.scrollY;
+                var triggerOffset = title.offsetHeight + 35;
+                var progressMax = lastDocumentHeight - lastWindowHeight;
 
-        // show/hide floating header
-        if (lastScrollY >= trigger + triggerOffset) {
-            header.classList.add('floating-active');
-        } else {
-            header.classList.remove('floating-active');
-        }
+                // show/hide floating header
+                if (lastScrollY >= trigger + triggerOffset) {
+                    header.classList.add('floating-active');
+                } else {
+                    header.classList.remove('floating-active');
+                }
 
-        progressBar.setAttribute('max', progressMax);
-        progressBar.setAttribute('value', lastScrollY);
+                progressBar.setAttribute('max', progressMax);
+                progressBar.setAttribute('value', lastScrollY);
 
-        ticking = false;
-    }
+                ticking = false;
+            }
 
-    window.addEventListener('scroll', onScroll, {passive: true});
-    window.addEventListener('resize', onResize, false);
+            window.addEventListener('scroll', onScroll, {passive: true});
+            window.addEventListener('resize', onResize, false);
 
-    update();
-});
-</script>
+            update();
+        });
+    </script>
 {{/contentFor}}

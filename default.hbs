@@ -28,11 +28,12 @@
         {{!-- The footer at the very bottom of the screen --}}
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}</section>
+                <section class="copyright"><a href="{{@site.url}}">{{@site.title}}</a> &copy; {{date format="YYYY"}}</section>
+                <section class="disclaimer"><a href="{{@site.url}}/disclaimer">Disclaimer</a></section>
                 <nav class="site-footer-nav">
-                    <a href="{{@blog.url}}">Latest Posts</a>
-                    {{#if @blog.facebook}}<a href="{{facebook_url @blog.facebook}}" target="_blank" rel="noopener">Facebook</a>{{/if}}
-                    {{#if @blog.twitter}}<a href="{{twitter_url @blog.twitter}}" target="_blank" rel="noopener">Twitter</a>{{/if}}
+                    <a href="{{@site.url}}">Latest Posts</a>
+                    {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener">Facebook</a>{{/if}}
+                    {{#if @site.twitter}}<a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener">Twitter</a>{{/if}}
                     <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
                 </nav>
             </div>
@@ -45,10 +46,10 @@
     <div id="subscribe" class="subscribe-overlay">
         <a class="subscribe-overlay-close" href="#"></a>
         <div class="subscribe-overlay-content">
-            {{#if @blog.logo}}
-                <img class="subscribe-overlay-logo" src="{{@blog.logo}}" alt="{{@blog.title}}" />
+            {{#if @site.logo}}
+                <img class="subscribe-overlay-logo" src="{{@site.logo}}" alt="{{@site.title}}" />
             {{/if}}
-            <h1 class="subscribe-overlay-title">Subscribe to {{@blog.title}}</h1>
+            <h1 class="subscribe-overlay-title">Subscribe to {{@site.title}}</h1>
             <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered straight to your inbox</p>
             {{subscribe_form placeholder="youremail@example.com"}}
         </div>
@@ -62,7 +63,68 @@
         crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="{{asset "js/jquery.fitvids.js"}}"></script>
+    <!-- Start of Site Search 360 script (put right before the closing </body> tag) -->
+    <script type="text/javascript">
+        window.ss360Config = {
+            suggestions: {
+                show: false,
+                showImages: false
+            },
+            style: {
+                themeColor: "#588936",
+                accentColor: "#2F2B2B",
+                searchBox: {
+                    text: {
+                        color: "#cecece",
+                        size: "14px"
+                    },
+                    border: {
+                        color: "#cecece",
+                        radius: "6px"
+                    },
+                    padding: "10px",
+                    icon: {
+                        image: "magnifier",
+                        color: "#cecece"
+                    },
+                    button: {
+                        text: "Search",
+                        color: "#cecece",
+                        iconPadding: "8px",
+                        radius: "6px"
+                    }
+                }
+            },
+            searchBox: {
+                searchButton: "#searchButton"
+            },
+            results: {
+                moreResultsPagingSize: "12"
+            },
+            tracking: {
+                providers: []
+            },
+            layout: {
+                mobile: {
+                    showImages: false
+                },
+                desktop: {
+                    showImages: false
+                },
+                navigation: {
+                    position: "none"
+                }
+            },
+            siteId: "blog.10pines.com",
+            showErrors: false
+        };
 
+        var e=document.createElement("script");
+        e.async=!0;
+        e.src="https://cdn.sitesearch360.com/v13/sitesearch360-v13.min.js";
+        document.getElementsByTagName("body")[0].appendChild(e);
+    </script>
+    <!-- End of Site Search 360 script -->
     {{#if pagination.pages}}
     <script>
         var maxPages = parseInt('{{pagination.pages}}');
