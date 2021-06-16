@@ -3,12 +3,14 @@
 
 {{#author}}
 {{!-- Everything inside the #author tags pulls data from the author --}}
-<header class="site-header outer {{#if cover_image}}" style="background-image: url({{cover_image}}){{else}}no-cover{{/if}}">
+<header class="site-header outer" style="background-image: url({{#if cover_image}}{{cover_image}}{{else}}{{asset "forest2.jpg"}}{{/if}})">
     <div class="inner">
         {{> "site-nav"}}
         <div class="site-header-content">
             {{#if profile_image}}
                 <img class="author-profile-image" src="{{profile_image}}" alt="{{name}}" />
+            {{else}}
+                <img class="author-profile-image" src="{{asset "logo-circulizable-transparente-1.png"}}" alt="{{name}}" />
             {{/if}}
             <h1 class="site-title">{{name}}</h1>
             {{#if bio}}
@@ -39,7 +41,7 @@
 
 {{!-- The main content area --}}
 <main id="site-main" class="site-main outer" role="main">
-    <div class="inner">
+    <div class="c">
 
         <div class="post-feed">
             {{#foreach posts}}
@@ -52,3 +54,4 @@
 
     </div>
 </main>
+

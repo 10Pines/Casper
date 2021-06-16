@@ -16,11 +16,15 @@
                 <p>{{excerpt words="33"}}</p>
             </section>
         </a>
+        {{#primary_author}}
         <footer class="post-card-meta">
-            {{#if author.profile_image}}
-                <img class="author-profile-image" src="{{author.profile_image}}" alt="{{author.name}}" />
+            {{#if profile_image}}
+                <img class="author-profile-image" src="{{profile_image}}" alt="{{name}}" />
+            {{else}}
+                <img class="author-profile-image" src="{{asset "logo-circulizable-transparente-1.png"}} alt="{{name}}" />
             {{/if}}
-            <span class="post-card-author">{{author}}</span>
+            <span class="post-card-author"><a href="{{url}}">{{name}}</a></span>
         </footer>
+        {{/primary_author}}
     </div>
 </article>

@@ -480,3 +480,15 @@ h6 {
     font-size: 1.4rem;
     font-weight: 500;
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
