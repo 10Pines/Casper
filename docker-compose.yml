@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+
+  ghost:
+    image: ghost:3.12.1-alpine
+    ports:
+      - $GHOST_PORT:2368
+    environment:
+      url: http://localhost:$GHOST_PORT
+      NODE_ENV: development
+    volumes:
+      - .:/var/lib/ghost/content/themes/casper
