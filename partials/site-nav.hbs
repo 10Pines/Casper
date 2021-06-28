@@ -1,6 +1,6 @@
 <style>
 </style>
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Site Navigation">
     <div class="site-nav-left">
         {{^is "home"}}
             {{#if @site.logo}}
@@ -15,7 +15,8 @@
     </div>
     <div class="site-nav-right">
         <div>
-            <input id="searchBox" type="search" style="margin: 10px"/><input type="submit" id="searchButton" style="background-color: transparent"/>
+            <input id="searchBox" type="search" style="margin: 10px" aria-labelledby="searchButton"/>
+            <input type="submit" id="searchButton" style="background-color: transparent"/>
         </div>
         <div class="social-links">
             {{#if @site.facebook}}
