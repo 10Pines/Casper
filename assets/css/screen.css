@@ -1217,6 +1217,9 @@ Usage (In Ghost editor):
 
 .read-time-card {
     color: #3EB0EF !important;
+    margin: 1.5em 0 0.5em;
+    font-size: 1.4rem;
+    line-height: 1.15;
 }
 
 /* 7.3. Comments
