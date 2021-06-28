@@ -28,7 +28,8 @@
     </div>
     <div class="site-nav-right">
         <div>
-            <input id="searchBox" type="search" style="margin: 10px"/><input type="submit" id="searchButton" style="background-color: transparent"/>
+            <input id="searchBox" type="search" style="margin: 10px" aria-labelledby="searchButton"/>
+            <input type="submit" id="searchButton" style="background-color: transparent"/>
         </div>
         <div class="social-links">
             {{#if @site.facebook}}
