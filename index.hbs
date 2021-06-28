@@ -15,16 +15,10 @@ into the {body} of the default.hbs template --}}
                     {{@site.title}}
                 {{/if}}
             </h1>
-            <h2 class="site-description">{{@site.description}}</h2>
+            <p class="site-description">{{@site.description}}</p>
         </div>
         {{> "site-nav"}}
     </div>
-    <style>
-        .site-logo, .site-description {
-            -webkit-filter: drop-shadow(2px 2px 2px #000);
-            filter: drop-shadow(2px 2px 2px #000);
-        }
-    </style>
 </header>
 
 {{!-- The main content area --}}
@@ -38,6 +32,5 @@ into the {body} of the default.hbs template --}}
 
             {{/foreach}}
         </div>
-
     </div>
 </main>

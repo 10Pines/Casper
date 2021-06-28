@@ -162,6 +162,8 @@ body {
     padding: 0;
     font-size: 3.8rem;
     font-weight: 700;
+    -webkit-filter: drop-shadow(2px 2px 2px #000);
+    filter: drop-shadow(2px 2px 2px #000);
 }
 
 .site-logo {
@@ -176,6 +178,12 @@ body {
     font-weight: 400;
     letter-spacing: 0.5px;
     opacity: 0.8;
+    line-height: 1.15;
+}
+
+.site-logo, .site-description {
+    -webkit-filter: drop-shadow(2px 2px 2px #000);
+    filter: drop-shadow(2px 2px 2px #000);
 }
 
 @media (max-width: 500px) {
@@ -202,9 +210,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    height: 40px;
     overflow-y: hidden;
     font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px !important;
+    border-radius: 10px;
+    height: 60px;
 }
 
 .site-nav-left {
@@ -1216,6 +1227,9 @@ Usage (In Ghost editor):
 
 .read-time-card {
     color: #3EB0EF !important;
+    margin: 1.5em 0 0.5em;
+    font-size: 1.4rem;
+    line-height: 1.15;
 }
 
 /* 7.3. Comments
@@ -2059,4 +2073,26 @@ a.ss360-suggests__image-wrap img {
 /* Shift down text content, inline with feature images */
 .ss360-suggests__content {
     margin-top: 1em;
+}
+
+/* Tags */
+.pill-button {
+    margin: 10px;
+    text-shadow: 2px 2px 4px #000000;
+    box-shadow: 2px 2px 4px #000000;
+    background-color: #1b231e;
+    border: none;
+    color: black;
+    padding: 0 20px 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 40px
+}
+
+.tag-cloud-container {
+    margin: -50px auto;
+    width: 100%;
+    text-align: center
 }
