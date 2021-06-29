@@ -1,5 +1,3 @@
-<style>
-</style>
 <nav class="site-nav" aria-label="Site Navigation">
     <div class="site-nav-left">
         {{^is "home"}}
@@ -25,11 +23,12 @@
             {{#if @site.twitter}}
                 <a class="social-link social-link-tw" href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener">{{> "icons/twitter"}}</a>
             {{/if}}
+            {{#unless @labs.subscribers}}
+                <a class="social-link social-link-rss" href="http://cloud.feedly.com/#subscription/feed/{{@site.url}}/rss/" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
+            {{/unless}}
         </div>
         {{#if @labs.subscribers}}
             <a class="subscribe-button" href="#subscribe">Subscribe</a>
-        {{else}}
-            <a class="rss-button" href="http://cloud.feedly.com/#subscription/feed/{{@site.url}}/rss/" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
         {{/if}}
     </div>
 </nav>

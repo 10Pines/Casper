@@ -292,21 +292,23 @@ body {
 
 #searchButton {
     background-color: transparent;
-    color: #cecece;
+    color: #fff;
     font-size: 14px;
-    border: 1px solid #cecece;
+    border: 1px solid #fff;
     border-radius: 6px;
     cursor: pointer;
+    opacity: 0.8;
+}
+
+#searchButton:hover {
+    opacity: 1;
 }
 
 .social-links {
     flex-shrink: 0;
     display: flex;
     align-items: center;
-}
-
-.social-links a:last-of-type {
-    padding-right: 20px;
+    margin-left: 10px;
 }
 
 .social-link {
@@ -341,7 +343,9 @@ body {
 }
 
 .social-link-rss svg {
-    height: 1.9rem;
+    height: 2.1rem;
+    margin-bottom: 1px;
+    fill: #fff;
 }
 
 .subscribe-button {
@@ -353,6 +357,7 @@ body {
     line-height: 1em;
     border-radius: 10px;
     opacity: 0.8;
+    margin-left: 10px;
 }
 
 .subscribe-button:hover {
@@ -360,18 +365,9 @@ body {
     opacity: 1;
 }
 
-.rss-button {
-    opacity: 0.8;
-}
-
-.rss-button:hover {
-    opacity: 1;
-}
-
-.rss-button svg {
-    height: 2.1rem;
-    margin-bottom: 1px;
-    fill: #fff;
+.nav li a:focus, .site-nav-right input:focus, .social-link:focus, .rss-button:focus {
+    outline: 2px solid white;
+    border-radius: 3px;
 }
 
 @media (max-width: 700px) {
