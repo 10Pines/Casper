@@ -1,29 +1,33 @@
 <article class="post-card {{post_class}}{{#unless feature_image}} no-image{{/unless}}">
     {{#if feature_image}}
-        <a class="post-card-image-link" href="{{url}}">
+        <div class="post-card-image-container" href="{{url}}">
             <div class="post-card-image" style="background-image: url({{feature_image}})"></div>
-        </a>
+        </div>
     {{/if}}
     <div class="post-card-content">
-        <a class="post-card-content-link" href="{{url}}">
+        <div class="post-card-preview">
             <header class="post-card-header">
                 {{#if primary_tag}}
-                    <span class="post-card-tags">{{primary_tag.name}}</span>
+                    <div class="post-card-tags">
+                        <span class="sr-only">Tags: </span>
+                        <span class="post-card-tag">{{primary_tag.name}}</span>
+                    </div>
                 {{/if}}
-                <h2 class="post-card-title">{{title}}</h2>
+                <h2 class="post-card-title"><a href="{{url}}">{{title}}</a></h2>
             </header>
             <section class="post-card-excerpt">
                 <p>{{excerpt words="33"}}</p>
             </section>
-        </a>
+        </div>
         {{#primary_author}}
         <footer class="post-card-meta">
+            <span class="sr-only">Author: </span>
             {{#if profile_image}}
                 <img class="author-profile-image" src="{{profile_image}}" alt="{{name}}" />
             {{else}}
                 <img class="author-profile-image" src="{{asset "logo-circulizable-transparente-1.png"}} alt="{{name}}" />
             {{/if}}
-            <span class="post-card-author"><a href="{{url}}">{{name}}</a></span>
+            <a class="post-card-author" href="{{url}}">{{name}}</a>
         </footer>
         {{/primary_author}}
     </div>

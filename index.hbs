@@ -8,13 +8,13 @@ into the {body} of the default.hbs template --}}
 <header class="site-header outer {{#if @site.cover_image}}" style="background-image: url({{@site.cover_image}}){{else}}no-cover{{/if}}">
     <div class="inner">
         <div class="site-header-content">
-            <h1 class="site-title">
+            <p class="site-title">
                 {{#if @site.logo}}
                     <img class="site-logo" src="{{@site.logo}}" alt="{{@site.title}}" />
                 {{else}}
                     {{@site.title}}
                 {{/if}}
-            </h1>
+            </p>
             <p class="site-description">{{@site.description}}</p>
         </div>
         {{> "site-nav"}}
@@ -24,12 +24,11 @@ into the {body} of the default.hbs template --}}
 {{!-- The main content area --}}
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
+        <h1 class="sr-only">Posts</h1>
         <div class="post-feed">
             {{#foreach posts}}
-
                 {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
                 {{> "post-card"}}
-
             {{/foreach}}
         </div>
     </div>
